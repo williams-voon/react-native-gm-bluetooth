@@ -20,7 +20,7 @@ public class RCTGMBluetoothPackage implements ReactPackage {
         return modules;
     }
 
-    @Override
+    //@Override  //comment for RN 0.47
     public List<Class<? extends JavaScriptModule>> createJSModules() {
         return Collections.emptyList();
     }
