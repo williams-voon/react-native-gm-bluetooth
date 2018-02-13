@@ -1,3 +1,6 @@
+import {Buffer} from 'buffer'
+const iconv = require('iconv-lite')
+
 const _ = require('lodash');
 const Util = require('./util');
 
@@ -27,15 +30,12 @@ const Common = {
 };
 
 const Config = {
+    cacheMode:false,
     wordNumber: 48 // 可打印的字数，对应80mm纸张
 };
 
-let writeTextToDevice, writeHexToDevice;
+let writeTextToDevice, writeHexToDevice, flushToDevice;
 
-function _setBT(bt) {
-    writeTextToDevice = bt.writeTextToDevice;
-    writeHexToDevice = bt.writeHexToDevice;
-}
 
 function setConfig(config) {
     Object.assign(Config, config);
@@ -73,13 +73,54 @@ function keyValue(name, value, wordNumber = Config.wordNumber) {
     }).join('');
 }
 
+const buffer= new Buffer(16)
+buffer.fill(0);
+
 const ESC = {
     Common,
+    buffer,
     Util: {
         leftRight,
         keyValue,
     },
-    _setBT,
+    _setBT:function(bt) {
+        writeTextToDevice = (text)=>{
+            let buf = iconv.encode(text, 'gbk');
+            if(Config.cacheMode){
+                this.buffer=Buffer.concat([this.buffer, buf])
+            }else{
+                bt.writeToDevice(buf.toString('base64')) 
+            }
+        }
+        writeHexToDevice = (text)=>{
+            if(text.length>0){
+                const arr=text.split(' ')
+                const buf=[]
+                for(let chr of arr){
+                    buf.push(parseInt(chr, 16))
+                }
+                let buff=new Buffer(buf)
+                if(Config.cacheMode){
+                    this.buffer=Buffer.concat([this.buffer, buff])
+                }else{
+                    //注意，第一版（https://github.com/rusel1989/react-native-bluetooth-serial ）
+                    //使用的是 writeToDevice 写数据。我参考的第二版，也就是我fork出来的版本自己实现了 writeTextToDevice
+                    //writeTextToDevice使用比较直观的方式输出二进制。
+                    //我觉得这个思路不错，但是最好还是和第一版保持一致。所以用回第一版的方案。
+                    //也就是原生部分，第二版的增加部分都没有使用。
+                    bt.writeToDevice(buff.toString('base64')) 
+                }
+            }
+        }
+        flushToDevice=()=>{
+            if(Config.cacheMode){
+                if(this.buffer.length>0){
+                    bt.writeToDevice(this.buffer.toString('base64'))
+                    this.buffer.fill(0);//清空数组 
+                }
+            }
+        }
+    },
     setConfig,
     
     init(){
@@ -174,6 +215,9 @@ const ESC = {
         this.text(qrCodeStr)
         let cmdPrint='1d 28 6b 03 00 31 51 30'
         writeHexToDevice(cmdPrint)
+    },
+    flush(){
+        flushToDevice()
     }
 };
 
