@@ -1,6 +1,6 @@
 {
   "name": "react-native-gm-bluetooth",
-  "version": "0.39.7",
+  "version": "0.39.8",
   "description": "react-native-gm-bluetooth",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,9 @@
   },
   "homepage": "https://github.com/gmfe/react-native-gm-bluetooth#readme",
   "dependencies": {
-    "buffer": "^4.6.0"
+    "buffer": "^5.0.8",
+    "iconv-lite": "^0.4.19",
+    "stream": "0.0.2"
   },
   "peerDependencies": {
     "react-native": ">=0.40",
