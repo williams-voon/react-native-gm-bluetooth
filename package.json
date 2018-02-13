@@ -1,34 +1,60 @@
 {
-  "name": "react-native-gm-bluetooth",
-  "version": "0.39.8",
-  "description": "react-native-gm-bluetooth",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "_from": "git+https://github.com/williams-voon/react-native-gm-bluetooth.git",
+  "_id": "react-native-gm-bluetooth@0.39.7",
+  "_inBundle": false,
+  "_location": "/react-native-gm-bluetooth",
+  "_phantomChildren": {
+    "base64-js": "1.2.1",
+    "ieee754": "1.1.8",
+    "isarray": "1.0.0"
   },
-  "repository": {
+  "_requested": {
     "type": "git",
-    "url": "git+https://github.com/gmfe/react-native-gm-bluetooth.git"
+    "raw": "https://github.com/williams-voon/react-native-gm-bluetooth.git",
+    "rawSpec": "https://github.com/williams-voon/react-native-gm-bluetooth.git",
+    "saveSpec": "git+https://github.com/williams-voon/react-native-gm-bluetooth.git",
+    "fetchSpec": "https://github.com/williams-voon/react-native-gm-bluetooth.git",
+    "gitCommittish": null
   },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://github.com/williams-voon/react-native-gm-bluetooth.git#c60c2134ccc8b868913325c65010bce1d46cda9a",
+  "_spec": "https://github.com/williams-voon/react-native-gm-bluetooth.git",
+  "_where": "/Users/apple/Documents/workspace/react-native/blueprinting2",
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/gmfe/react-native-gm-bluetooth/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "buffer": "^5.0.8",
+    "iconv-lite": "^0.4.19",
+    "stream": "0.0.2"
+  },
+  "deprecated": false,
+  "description": "react-native-gm-bluetooth",
+  "homepage": "https://github.com/gmfe/react-native-gm-bluetooth#readme",
   "keywords": [
     "bluetooth",
     "react-native",
     "weight",
     "print"
   ],
-  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/gmfe/react-native-gm-bluetooth/issues"
-  },
-  "homepage": "https://github.com/gmfe/react-native-gm-bluetooth#readme",
-  "dependencies": {
-    "buffer": "^5.0.8",
-    "iconv-lite": "^0.4.19",
-    "stream": "0.0.2"
-  },
+  "main": "index.js",
+  "name": "react-native-gm-bluetooth",
   "peerDependencies": {
     "react-native": ">=0.40",
     "lodash": "^4.17.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gmfe/react-native-gm-bluetooth.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.39.8"
 }
