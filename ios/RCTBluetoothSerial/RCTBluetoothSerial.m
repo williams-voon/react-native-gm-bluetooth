@@ -20,6 +20,8 @@
 @end
 
 @implementation RCTBluetoothSerial
+//add by fangchong
++ (BOOL)requiresMainQueueSetup { return YES; }
 
 RCT_EXPORT_MODULE();
 
