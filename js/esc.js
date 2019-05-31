@@ -34,7 +34,7 @@ const Config = {
     wordNumber: 48 // 可打印的字数，对应80mm纸张
 };
 
-let writeTextToDevice, writeHexToDevice, flushToDevice;
+let writeTextToDevice, writeHexToDevice, flushToDevice, writeBase64ToDevice;
 
 
 function setConfig(config) {
@@ -118,6 +118,12 @@ const ESC = {
                     bt.writeToDevice(this.buffer.toString('base64'))
                     this.buffer.fill(0);//清空数组 
                 }
+            }
+        }
+        writeBase64ToDevice=(text)=>{
+            if(text.length>0){
+                flushToDevice()
+                bt.writeToDevice(text) 
             }
         }
     },
@@ -215,6 +221,12 @@ const ESC = {
         this.text(qrCodeStr)
         let cmdPrint='1d 28 6b 03 00 31 51 30'
         writeHexToDevice(cmdPrint)
+    },
+    writeBase64StringAndFlush(cmd){//输出原始命令，这个要谨慎使用。需要后台java程序配合生成命令内容
+        writeBase64ToDevice(cmd)
+    },
+    writeHexString(cmd){//输出原始命令，这个要谨慎使用。需要后台java程序配合生成命令内容
+        writeHexToDevice(cmd)
     },
     flush(){
         flushToDevice()
