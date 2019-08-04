@@ -22,6 +22,9 @@ const Common = {
     FONT_HEIGHT_TIMES: '1B 21 10',//选择倍高模式。打印瘦高字体
     FONT_WIDTH_TIMES: '1B 21 20',//选择倍宽模式，实际效果是字体变大，看上去更宽，高度似乎也有一点增高。粗体无效果。
     FONT_HEIGHT_WIDTH_TIMES: '1B 21 30',//字体放大
+    CHINESE_FONT_HEIGHT_TIMES: '1C 21 08', //汉字倍高
+    CHINESE_FONT_WIDTH_TIMES: '1C 21 04', //汉字倍宽
+    CHINESE_FONT_HEIGHT_WIDTH_TIMES: '1C 21 0C',//汉字字体放大
     
     SOUND: "1B 42 02 02",  // 蜂鸣 2次/100ms
 
@@ -161,12 +164,15 @@ const ESC = {
     
     fontHeightTimes(){
         writeHexToDevice(Common.FONT_HEIGHT_TIMES);
+        writeHexToDevice(Common.CHINESE_FONT_HEIGHT_TIMES);
     },
     fontWidthTimes(){
         writeHexToDevice(Common.FONT_WIDTH_TIMES);
+        writeHexToDevice(Common.CHINESE_FONT_WIDTH_TIMES);
     },
     fontHeightWidthTimes(){
         writeHexToDevice(Common.FONT_HEIGHT_WIDTH_TIMES);
+        writeHexToDevice(Common.CHINESE_FONT_HEIGHT_WIDTH_TIMES);
     },
     
     text(str){
